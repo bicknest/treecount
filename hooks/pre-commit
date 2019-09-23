@@ -1,0 +1,27 @@
+#!/bin/bash
+
+function testsFailed() {
+    command -v osascript > /dev/null && osascript -e 'display notification "Precommit tests failed" with title "Tests failed"';
+}
+
+function testsSucceeded()
+{
+    command -v osascript > /dev/null && osascript -e 'display notification "Precommit tests passed" with title "Tests passed"';
+}
+
+git diff --cached --name-status | grep -v "frontend" | grep -v "ui.static.ui.webpack"
+python_changed=$?
+
+if [ $python_changed -eq 0 ]; then
+    echo "Changes to django app found - running python style checks and tests"
+    pipenv run flake8 .
+    if [ $? -ne 0 ]
+        then
+        echo "Python style errors found, aborting commit."
+        echo "Bypass this check by using the --no-verify option."
+        testsFailed;
+        exit 1
+    fi
+fi
+testsSucceeded;
+exit 0
