@@ -1,4 +1,4 @@
-# treecount
+# TreeCount
 An application for foresters and treeplanters to keep track of their seedlots and their plots
 
 # Backend
