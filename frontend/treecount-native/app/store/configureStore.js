@@ -1,17 +1,13 @@
-// eslint-disable
 import {AsyncStorage} from 'react-native';
-import {createStore, applyMiddleware, compose} from 'react-redux';
-import {persistStore, createTransform, getStoredState} from 'redux-persist';
+import {createStore, applyMiddleware, compose} from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import FilesystemStorage from 'redux-persist-filesystem-storage';
-import Immutable from 'seamless-immutable';
 import _ from 'lodash';
 
 import createReducer from '../reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(initialState, config) {
+export default function configureStore(initialState) {
   const middlewares = [sagaMiddleware];
 
   const enhancers = [applyMiddleware(...middlewares)];
@@ -20,13 +16,13 @@ export default function configureStore(initialState, config) {
   const store = createStore(baseReducers, initialState, compose(...enhancers));
 
   // Create hook for async sagas once i have figured out and applied middleware
-  store.runSaga = sagaMiddleware.run;
-  sagaMiddleware.run(rootSaga);
+  // store.runSaga = sagaMiddleware.run;
+  // sagaMiddleware.run(rootSaga);
 
   // Initialize store with no async reducers
-  store.asyncReducers = {};
+  // store.asyncReducers = {};
 
-  let fsPersistor;
+  /* let fsPersistor;
 
   // Handle migrating from AsyncStorage to redux-persist-filesystem-storage
   async function migrateFromAsyncStorage(fsError, fsResult) {
@@ -71,6 +67,7 @@ export default function configureStore(initialState, config) {
     },
     (fsError, fsResult) =>
       migrateFromAsyncStorage(fsError, fsResult).then(config.onRehydrate)
-  );
+  ); */
+
   return store;
 }

@@ -5,8 +5,8 @@ import {createSelector} from 'reselect';
 import NavigationExperimental from 'react-native-navigation-experimental-compat';
 import naviagtor from '../navigator';
 import Auth from './Auth/Auth';
-import Home from './Home/Home';
-import Profile from './Profile/Profile';
+import HomeScreen from './Home/HomeScreen';
+import ProfileScreen from './Profile/ProfileScreen';
 
 const {CardStack: NavigationCardStack} = NavigationExperimental;
 
@@ -38,18 +38,41 @@ class Navigator extends Component {
 
   // why?
   _push = route => this.props.push(_transformRoute(route));
+
+  _reset = routes =>
+    this.props.reset(routes.map(_transformRoute), routes.length - 1);
+
+  _resetTo = (routeName, params) => this.props.resetTo(routeName, params);
+
+  _replace = route => {
+    const {navigation, replaceAt} = this.props;
+    const currentKey = navigation.routes[navigation.index || 0].key;
+    return replaceAt(currentKey, _transformRoute(route));
+  };
+
+  containers = {
+    Auth,
+    HomeScreen,
+    ProfileScreen,
+  };
+
+  preAuthContainers = new Set(['Auth']);
+
+  _renderScene = ({scene: {route}}) => {
+    const {key, ...routeParams} = route;
+    const props = {
+      ...routeParams,
+      navigationState: this.props.navigation,
+      navigator: this.navigator,
+    };
+    const Container = this.containers[key] || HomeSCreen;
+    return <Container {...props} />;
+  };
+
   render() {
     const {
       navigation: {index, routes},
     } = this.props;
-
-    containers = {
-      Auth,
-      Home,
-      Profile,
-    };
-
-    preAuthContainers = new Set(['Auth']);
 
     return (
       <NavigationCardStack

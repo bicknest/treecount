@@ -1,4 +1,4 @@
-import Config from 'react-native-config';
+/* import Config from 'react-native-config';
 import configureStore from './store/configureStore';
 // import utils from './utils';
 
@@ -20,4 +20,4 @@ export default function main({onRehydrate}): object {
   // utils.configure(config);
   store = configureStore({version}, {IS_DEV, onRehydrate, logEnabled});
   return {store, needsRehydration};
-}
+} */

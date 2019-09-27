@@ -20,7 +20,7 @@ const navigationInitialState: NavigationState = {
     key: globalnavkey,
     routes: [
         {
-            key: 'Auth',
+            key: 'HomeScreen',
         },
     ],
 };
@@ -37,7 +37,7 @@ const navigator = {
         return actions.reset([{key: routeKey, ...params}], globalnavkey, 0);
     }
     return actions.reset(
-        [{key: 'Home'}, {key: routeKey, ...params}],
+        [{key: 'HomeScreen'}, {key: routeKey, ...params}],
         globalnavkey,
         1
     );

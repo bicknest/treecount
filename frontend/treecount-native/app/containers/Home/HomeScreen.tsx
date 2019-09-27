@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 import {Button} from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationScreenProp, NavigationState } from 'react-navigation';
+import { Navigator } from '../../navigator';
 
 interface Props {
-    navigation: NavigationScreenProp<NavigationState>;
+    navigator: Navigator
 };
 
 export default class HomeScreen extends Component<Props> {
 
     handleNext = () => {
-        const {navigate} = this.props.navigation;
-        navigate('Profile');
+        const {navigator} = this.props;
+        navigator.push({key: 'ProfileScreen'});
     };
 
     render() {
-        const {navigate} = this.props.navigation;
+        const {navigator} = this.props;
         return (
         <View style={styles.container}>
             <Text> Welcome to TreeCount </Text>

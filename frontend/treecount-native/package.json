@@ -6,12 +6,12 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook -s ./node_modules/react-native-vector-icons"
   },
   "dependencies": {
     "@babel/core": "^7.6.2",
-    "@react-native-community/netinfo": "^4.2.2",
     "babel-loader": "^8.0.6",
+    "color": "^3.1.2",
     "expo": "^35.0.0",
     "lodash": "^4.17.15",
     "react": "16.8.3",
@@ -20,11 +20,10 @@
     "react-native-config": "^0.11.7",
     "react-native-navigation-experimental-compat": "^1.1.0",
     "react-native-navigation-redux-helpers-compat": "^0.6.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.7",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
-    "redux-persist": "^6.0.0",
-    "redux-persist-filesystem-storage": "^2.0.0",
     "redux-saga": "^1.1.1",
     "seamless-immutable": "^7.1.4"
   },
@@ -38,6 +37,7 @@
     "eslint": "^6.4.0",
     "eslint-config-prettier": "^6.3.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.1",
     "prettier": "^1.18.2",
     "typescript": "^3.4.5"
