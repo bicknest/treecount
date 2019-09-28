@@ -22,6 +22,9 @@ Getting things running:
 5. Start up an emulator
 6. Choose the emulator you would like to run the app on from your browser
 
+GOTCHAS:
+1. Expo will not work on certain public wifi networks
+
 ** Note: This project uses Storybook for easily rendering and testing UI components
 `npm run storybook`should build and run storybook in your browser
 New stories should be placed in the directory that the component lives in with the filename *.js.stories.js
