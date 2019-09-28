@@ -11,3 +11,5 @@ export const primaryColor7 = color('#28C700').toString();
 export const primaryColor8 = color('#32B300').toString();
 export const primaryColor9 = color('#399E00').toString();
 export const primaryColor10 = color('#3B8700').toString();
+
+export const backgroundDefaultColor = primaryColor1;

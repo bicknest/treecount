@@ -20,7 +20,7 @@ const navigationInitialState: NavigationState = {
     key: globalnavkey,
     routes: [
         {
-            key: 'HomeScreen',
+            key: 'Auth',
         },
     ],
 };
