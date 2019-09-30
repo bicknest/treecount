@@ -1,5 +1,10 @@
+// TODO: figure out provider for redux vs. apollo
 import {AppState, View, YellowBox} from 'react-native';
 import {Provider} from 'react-redux';
+import {ApolloProvider} from '@apollo/react-hooks';
+import {ApolloClient} from 'apollo-client';
+import {InMemoryCache} from 'apollo-cache-inmemory';
+import {HttpLink} from 'apollo-link-http';
 import React, {Component} from 'react';
 import configureStore from '../store/configureStore';
 import Navigator from './navigator';
@@ -9,13 +14,25 @@ YellowBox.ignoreWarnings([
   'Moduel RCTImageLoader',
 ]);
 
+const cache = new InMemoryCache();
+const link = new HttpLink({
+  uri: 'http://localhost:8000/graphql/',
+});
+
+const client = new ApolloClient({
+  cache,
+  link,
+});
+
 export default class Index extends Component {
   render() {
     const store = configureStore();
     return (
       <View style={{backgroundColor: 'white', flex: 1}}>
         <Provider store={store}>
-          <Navigator />
+          <ApolloProvider client={client}>
+            <Navigator />
+          </ApolloProvider>
         </Provider>
       </View>
     );

@@ -1,8 +1,10 @@
 import * as React from 'react';
 import {View, TouchableOpacity, TextInput, StyleSheet} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import {useQuery} from '@apollo/react-hooks';
 
 import Icon from '../../components/icons/Icon';
+import TreeLogo from '../../components/icons/TreeLogo';
 import LargeText from '../../components/core/LargeText';
 import {
     primaryColor2,
@@ -10,12 +12,19 @@ import {
     primaryColor5,
     primaryColor7,
     primaryColor8,
-    primaryColor10,
+    primaryColor9,
     highlightSecondaryColor,
+    secondaryColor0,
+    secondaryColor1,
+    secondaryColor2,
+    secondaryColor3,
+    secondaryColor5,
+    secondaryColor10,
     secondaryColor4,
     secondaryColor8,
 } from '../../styles/colors';
 import {contentMargin} from '../../styles/spacing';
+import {GET_ALL_USERS} from './query';
 
 import Container from '../container';
 
@@ -36,10 +45,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: contentMargin * 4,
     },
-    iconWrapper: {
+    logoWrapper: {
         flex: 1,
         alignItems: 'center',
-        marginTop: contentMargin * 3,
+        marginTop: contentMargin * 2,
     },
     textInputWrapper: {
         flexDirection: 'row',
@@ -49,7 +58,7 @@ const styles = StyleSheet.create({
     },
     textInput: {
         flex: 1,
-        borderBottomColor: highlightSecondaryColor,
+        borderBottomColor: secondaryColor3,
         borderBottomWidth: 1,
         fontSize: 20,
         marginLeft: contentMargin,
@@ -57,6 +66,21 @@ const styles = StyleSheet.create({
         color: secondaryColor8,
     },
 });
+
+function GetUsers() {
+    const { loading, error, data } = useQuery(GET_ALL_USERS);
+    if (loading) {
+        console.log('loading');
+        return null;
+    }
+    if (error) {
+        console.log(error);
+        return null;
+    }
+
+    console.log(data);
+    return <LargeText> Got Users </LargeText>;
+};
     
 
 export default class AuthView extends React.Component<Props, State> {
@@ -85,40 +109,41 @@ export default class AuthView extends React.Component<Props, State> {
       const {company, username, password} = this.state;
     return (
         <Container>
-            <LinearGradient colors={[primaryColor2, primaryColor5, primaryColor8]} style={{flex: 1}}>
-                <View style={styles.iconWrapper} >
-                    <Icon name="fa-tree" size={150} style={{color: primaryColor7}} />
+            <LinearGradient colors={[secondaryColor3, secondaryColor5, secondaryColor8]} style={{flex: 1}}>
+                <View style={styles.logoWrapper} >
+                    <TreeLogo style={{width: 200, height: 500}} source="blah"/>
                 </View>
                 <View style={styles.textInputWrapper} >
-                    <Icon name="fa-building" style={{color: highlightSecondaryColor}} />
+                    <Icon name="fa-building" style={{color: secondaryColor3}} />
                     <TextInput
                         style={styles.textInput}
                         onChangeText={this.handleChangeCompany}
                         value={company}
-                        placeholderTextColor={secondaryColor4}
+                        placeholderTextColor={secondaryColor3}
                         placeholder="Company"
                 />
                 </View>
                 <View style={styles.textInputWrapper} >
-                    <Icon name="fa-user-o" style={{color: highlightSecondaryColor}} />
+                    <Icon name="fa-user-o" style={{color: secondaryColor3}} />
                     <TextInput
                         style={styles.textInput}
                         onChangeText={this.handleChangeUsername}
                         value={username}
-                        placeholderTextColor={secondaryColor4}
+                        placeholderTextColor={secondaryColor3}
                         placeholder="username"
                 />
                 </View>
-                <View style={styles.textInputWrapper} >
-                    <Icon name="fa-lock" style={{color: highlightSecondaryColor}} />
+                <View style={[styles.textInputWrapper, {marginBottom: contentMargin * 4}]} >
+                    <Icon name="fa-lock" style={{color: secondaryColor3}} />
                     <TextInput
                         style={styles.textInput}
                         onChangeText={this.handleChangePassword}
                         value={password}
-                        placeholderTextColor={secondaryColor4}
+                        placeholderTextColor={secondaryColor3}
                         placeholder="password"
                     />
                 </View>
+                <GetUsers />
             </LinearGradient>
         </Container>
     );
