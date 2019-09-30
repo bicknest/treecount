@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import {ApolloProvider} from '@apollo/react-hooks';
 import {ApolloClient} from 'apollo-client';
 import {InMemoryCache} from 'apollo-cache-inmemory';
-import {HttpLink} from 'apollo-link-http';
+import {createHttpLink} from 'apollo-link-http';
 import React, {Component} from 'react';
 import configureStore from '../store/configureStore';
 import Navigator from './navigator';
@@ -15,13 +15,13 @@ YellowBox.ignoreWarnings([
 ]);
 
 const cache = new InMemoryCache();
-const link = new HttpLink({
-  uri: 'http://localhost:8000/graphql/',
+const link = createHttpLink({
+  uri: 'http://10.0.2.2:8000/',
 });
 
 const client = new ApolloClient({
-  cache,
   link,
+  cache,
 });
 
 export default class Index extends Component {
