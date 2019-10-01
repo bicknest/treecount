@@ -30,8 +30,9 @@ class CreateUser(graphene.Mutation):
         username = graphene.String(required=True)
         password = graphene.String(required=True)
         email = graphene.String(required=True)
+        company = graphene.String(required=True)
 
-    def mutate(self, info, username, password, email):
+    def mutate(self, info, username, password, email, company):
         user = get_user_model()(
             username=username,
             email=email,
@@ -39,7 +40,7 @@ class CreateUser(graphene.Mutation):
         user.set_password(password)
         user.save()
 
-        return CreateUser(user=user)
+        return CreateUser(user=user, company=company)
 
 
 class Mutation(graphene.ObjectType):

@@ -24,7 +24,7 @@ import {
     secondaryColor8,
 } from '../../styles/colors';
 import {contentMargin} from '../../styles/spacing';
-import {GET_ALL_USERS} from './query';
+import {GET_ALL_USERS, GET_ME} from './query';
 
 import Container from '../container';
 
