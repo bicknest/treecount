@@ -16,8 +16,11 @@ Getting things running:
 
 # Frontend
 The frontend is built React-Native using Redux to handle state
+
 It is managed using yarn
+
 Getting things running:
+
 1. Install Android Studio or Xcode and get an emulator running
 2. Install yarn if you don't have it already
 3. Run `yarn` in the home directory
