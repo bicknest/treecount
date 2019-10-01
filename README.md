@@ -3,8 +3,11 @@ An application for foresters and treeplanters to keep track of their seedlots an
 
 # Backend
 The backend is built with the Graphene GraphQL framework sitting on top of a Python/Django framework
+
 It is managed using pipenv
+
 Getting things running:
+
 1. Install pipenv
 2. run migrate all the current migrations `pipenv run python manage.py migrate`
 3. run server `pipenv run python manage.py runserver`
